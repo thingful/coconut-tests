@@ -67,8 +67,18 @@ print('\n07 - Create blind proof')
 with open('dddc-pilot-contracts/src/07-CITIZEN-prove-credential.zencode') as file:
     blind_credential_script = file.read()
 
-blind_credential, errs = zenroom.execute(blind_credential_script.encode(), data=aggregate_credential, keys=issuer_public)
+blind_credential, errs = zenroom.execute(blind_credential_script.encode(), data=issuer_public, keys=aggregate_credential)
 print('Blind credential:')
 print('------------------------------')
 print(json.dumps(json.loads(blind_credential.decode()), sort_keys=True, indent=4))
+print('------------------------------')
+
+print('\n08 - Verify blind proof')
+with open('dddc-pilot-contracts/src/08-VERIFIER-verify-credential.zencode') as file:
+    verify_credential_script = file.read()
+
+verify_response, errs = zenroom.execute(verify_credential_script.encode(), data=issuer_public, keys=blind_credential)
+print('Verified credential:')
+print('------------------------------')
+print(verify_response.decode())
 print('------------------------------')
