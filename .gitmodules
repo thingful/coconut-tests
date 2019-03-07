@@ -1,0 +1,3 @@
+[submodule "dddc-pilot-contracts"]
+	path = dddc-pilot-contracts
+	url = git@github.com:DECODEproject/dddc-pilot-contracts.git
